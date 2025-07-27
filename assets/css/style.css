@@ -460,7 +460,7 @@ header .navbar ul li a:hover {
 
 /* skills section starts */
 .skills {
-  min-height: 90vh;
+  min-height: 70vh;
   background: linear-gradient(to bottom, #57059e, #4a00e0);
 }
 .skills h2 {
@@ -535,7 +535,7 @@ header .navbar ul li a:hover {
 /* education section starts */
 .education {
   background: #e5ecfb;
-  min-height: 80vh;
+  min-height: 70vh;
 }
 .education .qoute {
   font-size: 1.5rem;
@@ -1222,4 +1222,44 @@ form .button-area {
 #scroll-top.active {
   top: calc(100% - 12rem);
 }
+
+.daily-life {
+  padding: 50px 0;
+  background: linear-gradient(to bottom, #4b0082, #6a0dad, #7b2cbf, #8338ec); /* màu tím chuyển dần */
+  color: white;
+}
+
+.daily-life {
+  padding: 15px 250px;
+  text-align: center;
+  background-color: #f9f9f9;
+}
+
+.daily-life .heading {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+.daily-life .heading span {
+  color: #FFD700; /* màu vàng gold */
+}
+
+.photo-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.photo-gallery img {
+  width: 200px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.photo-gallery img:hover {
+  transform: scale(1.05);
+}
+
 /* scroll top ends */
