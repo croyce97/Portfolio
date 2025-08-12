@@ -1262,4 +1262,101 @@ form .button-area {
   transform: scale(1.05);
 }
 
-/* scroll top ends */
+/* === Certifications: nền tím, quote to, meta ở trên ảnh === */
+.certifications{
+  padding: 4rem 9%;
+  /* tím đậm dịu mắt */
+  background: linear-gradient(180deg, #2b115e 0%, #1b103a 100%);
+  color: #eaeaf2;
+}
+
+.certifications .heading i {
+  color: #fff !important;
+  text-shadow: 0 0 6px rgba(255,255,255,0.6);
+}
+
+.certifications .heading{
+  text-align:center;
+  padding-bottom: 1rem;
+}
+
+.certifications .heading span{
+  color:#32d1d6; /* giữ tông accent cũ nhưng nổi trên nền tím */
+}
+
+.certifications .qoute{
+  text-align:center;
+  margin: 0 auto 2.2rem;
+  max-width: 760px;
+  font-size: 1.5rem;      /* to hơn */
+  line-height: 1.6;
+  opacity: .95;
+  font-weight: 600;
+}
+
+/* Grid cards */
+.certifications .box-container{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap:1.6rem;
+}
+
+/* Card style (giữ vibe tối, nổi trên nền tím) */
+.certifications .box{
+  display:flex;               /* để đảo thứ tự bằng order */
+  flex-direction: column;
+  background: rgba(191, 26, 26, 0.03);
+  border: 1px solid rgba(204, 31, 31, 0.06);
+  border-radius: 16px;
+  box-shadow: 0 12px 28px rgba(192, 34, 34, 0.25);
+  overflow: hidden;
+  backdrop-filter: blur(2px);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.certifications .box:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px rgba(0,0,0,.32);
+  border-color: rgba(255,255,255,.12);
+}
+
+/* ---- Meta (tên + ngày) ở TRÊN ảnh ---- */
+.certifications .box .content{
+  order: 1;                    /* đưa lên trước ảnh */
+  padding: 1rem 1.2rem 1rem;
+  border-bottom: 1px solid rgba(216, 14, 14, 0.06);
+}
+.certifications .box .content h3{
+  margin: 0 0 .35rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #f3f6ff;
+}
+.certifications .box .content h4{
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #c5c8d8;
+}
+
+/* Ảnh ở dưới meta */
+.certifications .box .image{
+  order: 2;
+  width: 100%;
+  aspect-ratio: 16/10;
+  background: radial-gradient(1200px 300px at 10% 0%, rgba(50,209,214,.10), transparent),
+              rgba(211, 21, 21, 0.02);
+  display:grid;
+  place-items:center;
+}
+.certifications .box .image img{
+  max-width: 88%;
+  max-height: 88%;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 18px rgba(58, 56, 56, 0.25));
+}
+
+/* Responsive nhỏ hơn */
+@media (max-width: 480px){
+  .certifications .qoute{ font-size: 1.15rem; }
+  .certifications .box-container{ grid-template-columns: 1fr; }
+}
