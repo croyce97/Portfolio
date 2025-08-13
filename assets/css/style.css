@@ -1389,6 +1389,28 @@ form .button-area {
   height: 220%;
 }
 
+/* Hiệu ứng sóng cho tiêu đề hero section */
+.wave-title {
+  display: inline-block;
+  font-size: 5rem;
+  font-weight: 800;
+  color: #0070f3;
+  background: linear-gradient(90deg, #0070f3 60%, #00c6ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  animation: wave 2.5s infinite linear;
+}
+
+@keyframes wave {
+  0% { transform: translateY(0);}
+  10% { transform: translateY(-8px);}
+  20% { transform: translateY(0);}
+  30% { transform: translateY(8px);}
+  40% { transform: translateY(0);}
+  100% { transform: translateY(0);}
+}
+
 
 
 
