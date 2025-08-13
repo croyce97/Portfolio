@@ -71,11 +71,22 @@ document.addEventListener('visibilitychange',
 
 // <!-- typed js effect starts -->
 var typed = new Typed(".typing-text", {
-    strings: ["frontend development", "backend development", "web designing", "android development", "web development"],
+    strings: ["Devops Engineer", "Tech enthusiast", "Loving Naruto"],
     loop: true,
     typeSpeed: 50,
     backSpeed: 25,
     backDelay: 500,
+});
+
+// Typed.js cho tiêu đề động
+var typedTitle = new Typed(".typed-title", {
+  strings: [
+    "Hi There,<br>I'm Nguyen Quang Canh"
+  ],
+  typeSpeed: 60,
+  backSpeed: 30,
+  showCursor: false,
+  loop: false
 });
 // <!-- typed js effect ends -->
 
@@ -249,3 +260,9 @@ srtop.reveal('.experience .timeline .container', { interval: 400 });
 /* SCROLL CONTACT */
 srtop.reveal('.contact .container', { delay: 400 });
 srtop.reveal('.contact .container .form-group', { delay: 400 });
+
+/* SCROLL DAILY LIFE GALLERY */
+srtop.reveal('.daily-life .photo-gallery img', { interval: 120, origin: 'bottom', distance: '40px', scale: 0.95 });
+
+/* SCROLL CERTIFICATIONS */
+srtop.reveal('.certifications .box', { interval: 180, origin: 'bottom', distance: '60px', scale: 0.97 });
