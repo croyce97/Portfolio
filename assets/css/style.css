@@ -217,9 +217,11 @@ header .navbar ul li a:hover {
   border-radius: 50%;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   cursor: pointer;
+  transition: box-shadow 0.3s, filter 0.3s;
 }
 .home .image img:hover {
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 32px rgba(32, 32, 120, 0.45), 0 0 0 8px #ff7b0033;
+  filter: brightness(1.08) saturate(1.2);
 }
 .home .content h2 {
   font-size: 5rem;
@@ -346,7 +348,7 @@ header .navbar ul li a:hover {
 
 /* about section starts */
 .about {
-  background: rgb(255, 255, 255);
+  background: rgb(160, 160, 185);
 }
 .about .row {
   display: flex;
@@ -534,7 +536,7 @@ header .navbar ul li a:hover {
 
 /* education section starts */
 .education {
-  background: #e5ecfb;
+  background: #304f91;
   min-height: 70vh;
 }
 .education .qoute {
@@ -1255,11 +1257,13 @@ form .button-area {
   height: auto;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s;
 }
 
 .photo-gallery img:hover {
-  transform: scale(1.05);
+  transform: scale(1.12) rotate(-2deg);
+  box-shadow: 0 12px 32px rgba(60, 0, 120, 0.25);
+  z-index: 2;
 }
 
 /* === Certifications: nền tím, quote to, meta ở trên ảnh === */
@@ -1359,3 +1363,32 @@ form .button-area {
   .certifications .qoute{ font-size: 1.15rem; }
   .certifications .box-container{ grid-template-columns: 1fr; }
 }
+
+/* Button Ripple Effect */
+.btn, .work .desc .btn, .work .viewall .btn, .resumebtn .btn, .morebtn .btn, .button-area button {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after, .work .desc .btn::after, .work .viewall .btn::after, .resumebtn .btn::after, .morebtn .btn::after, .button-area button::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255,255,255,0.3);
+  border-radius: 100%;
+  transform: translate(-50%, -50%);
+  transition: width .4s, height .4s;
+  z-index: 0;
+}
+
+.btn:hover::after, .work .desc .btn:hover::after, .work .viewall .btn:hover::after, .resumebtn .btn:hover::after, .morebtn .btn:hover::after, .button-area button:hover::after {
+  width: 220%;
+  height: 220%;
+}
+
+
+
+
