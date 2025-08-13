@@ -40,11 +40,11 @@ const srtop = ScrollReveal({
 });
 
 var typed = new Typed(".typing-text", {
-    strings: ["Devops Engineer", "Tech enthusiast", "Loving Naruto"],
-    loop: true,
-    typeSpeed: 50,
-    backSpeed: 25,
-    backDelay: 500,
+  strings: ["Devops Engineer", "Tech enthusiast", "Loving Naruto"],
+  loop: true,
+  typeSpeed: 50,
+  backSpeed: 25,
+  backDelay: 500,
 });
 
 // Reveal từng section khi cuộn tới
@@ -146,3 +146,9 @@ var Tawk_API = Tawk_API || {},
   s0.parentNode.insertBefore(s1, s0);
 })();
 // End of Tawk.to Live Chat
+
+document.getElementById("play-music-btn").onclick = function () {
+  var audio = document.getElementById("bg-music");
+  audio.play();
+  this.style.display = "none";
+};
