@@ -187,6 +187,13 @@ header .navbar ul li a:hover {
   min-height: 100vh;
   align-items: center;
 }
+
+.home-btn-group {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem; /* khoảng cách giữa các nút */
+}
+
 .home #particles-js {
   position: absolute;
   top: 0;
@@ -247,7 +254,6 @@ header .navbar ul li a:hover {
 }
 .home .btn {
   margin-top: 1rem;
-  position: absolute;
   line-height: 0;
   padding: 1.6rem 3rem;
   border-radius: 4em;
