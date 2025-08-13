@@ -413,7 +413,7 @@ header .navbar ul li a:hover {
   text-transform: none;
 }
 .about .row .content .box-container .box p span {
-  color: #011aff;
+  color: #818be7;
 }
 .resumebtn {
   margin-top: 6rem;
@@ -940,30 +940,6 @@ header .navbar ul li a:hover {
   .certifications .box-container{ grid-template-columns: 1fr; }
 }
 
-/* Button Ripple Effect */
-.btn, .work .desc .btn, .work .viewall .btn, .resumebtn .btn, .morebtn .btn, .button-area button {
-  position: relative;
-  overflow: hidden;
-}
-
-.btn::after, .work .desc .btn::after, .work .viewall .btn::after, .resumebtn .btn::after, .morebtn .btn::after, .button-area button::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 0;
-  height: 0;
-  background: rgba(255,255,255,0.3);
-  border-radius: 100%;
-  transform: translate(-50%, -50%);
-  transition: width .4s, height .4s;
-  z-index: 0;
-}
-
-.btn:hover::after, .work .desc .btn:hover::after, .work .viewall .btn:hover::after, .resumebtn .btn:hover::after, .morebtn .btn:hover::after, .button-area button:hover::after {
-  width: 220%;
-  height: 220%;
-}
 
 /* Hiệu ứng sóng cho tiêu đề hero section */
 .wave-title {
