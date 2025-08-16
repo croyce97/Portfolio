@@ -1,0 +1,134 @@
+Chắc các bác cũng từng thấy mấy cái chức danh như Cloud Engineer, DevOps Engineer, với Site Reliability Engineer lượn lờ đâu đó rồi nhỉ? Mà nếu các bác cũng như đa số anh em mới vào ngành, chắc cũng từng tự hỏi:
+
+Ủa, mấy ông này cũng na ná nhau mà? Kiểu cloud, code, máy chủ… đúng không?
+
+Thật ra thì mấy vai trò này có trùng lặp ở vài chỗ, giống như mấy anh em họ hàng lớn lên cùng khu phố ấy, nhưng mà họ phục vụ những mục đích rất khác nhau trong các đội kỹ thuật hiện đại. Và việc nắm rõ sự khác biệt này có thể giúp các bác chọn đúng con đường, tăng cơ hội tìm việc, hoặc tránh được cái khoảnh khắc khó xử khi ai đó hỏi “rốt cuộc ông làm cái gì vậy?” mà mình đứng hình như cái máy tính Windows 95 đang chạy Chrome vậy đó.
+
+Thôi, mình cùng mổ xẻ vấn đề này một cách dân dã chứ không theo kiểu sách vở hàn lâm nhé. Pha ly cà phê yêu thích của các bác đi, rồi mình cùng nhảy vào thôi.
+
+1. Cloud Engineer: Kiến trúc sư của bầu trời số
+Cloud Engineer giống như người xây nhà trên mảnh đất số. Họ không chỉ biết về cloud, mà còn thiết kế, chuyển dữ liệu của doanh nghiệp lên đó, và tối ưu hóa chi phí để không làm sếp tài chính hết hồn khi nhận hóa đơn.
+
+Trọng tâm chính: Giúp doanh nghiệp chuyển lên đám mây, duy trì hạ tầng ở đó, và tiết kiệm chi phí.
+
+Kỹ năng cần thiết:
+- Nắm vững ít nhất một cloud provider: AWS, Azure hoặc GCP.
+- Biết dùng Infrastructure as Code (Terraform, CloudFormation, Pulumi).
+- Hiểu mạng: subnet, VPC, security group, load balancing.
+- Bảo mật: IAM, RBAC, mã hóa dữ liệu.
+- Lưu trữ: S3, EBS, EFS hoặc tương đương.
+- Quản lý database cloud: RDS, DynamoDB, Cosmos DB.
+- Tối ưu chi phí: Reserved Instances, FinOps.
+
+Một ngày làm việc:
+- Sáng: Kiểm tra log tự động triển khai.
+- Họp thiết kế kiến trúc microservices.
+- Tối ưu hóa tài nguyên giảm hóa đơn cloud.
+- Viết module Terraform.
+- Xử lý sự cố kết nối on-prem và cloud.
+- Chuẩn bị tài liệu cho kiểm toán.
+
+Mức lương (tham khảo):
+- Mới vào: 80k – 100k USD/năm
+- Kinh nghiệm: 110k – 140k USD/năm
+- Quản lý: 140k – 180k USD/năm trở lên.
+
+Xu hướng 2025:
+- Multi-cloud là tiêu chuẩn.
+- FinOps trở thành nhánh chuyên sâu.
+- Serverless và edge computing được chú ý.
+
+Phù hợp với ai: Người thích xây dựng hệ sinh thái số, mê sơ đồ kiến trúc, và vui khi tối ưu hóa chi phí cloud.
+
+2. DevOps Engineer: Người kết nối thần kỳ
+DevOps Engineer là cầu nối giữa lập trình viên và đội vận hành. Họ tự động hóa, tối ưu pipeline, triển khai nhanh và ổn định. Giống như xây cao tốc nối hai thành phố thay cho con đường đất.
+
+Trọng tâm chính: Tự động hóa quá trình build, test, deploy.
+
+Đồ nghề:
+- CI/CD pipelines: GitHub Actions, Jenkins, GitLab CI.
+- Docker, Kubernetes, ECS.
+- IaC: Terraform, Ansible.
+- Script: Bash, Python.
+- Quan sát hệ thống: Prometheus, Grafana, Datadog.
+- Git, chiến lược branching.
+- Kho artifact: Nexus, Docker Hub.
+
+Một ngày làm việc:
+- Sửa lỗi pipeline CI.
+- Tự động hóa database trong staging.
+- Merge code hạ tầng.
+- Triển khai rollback tự động.
+- Gỡ lỗi mạng container.
+- Rút ngắn thời gian build xuống 50%.
+
+Mức lương (tham khảo):
+- Mới vào: 85k – 105k USD/năm
+- Kinh nghiệm: 110k – 150k USD/năm
+- Quản lý: 140k – 190k USD/năm
+
+Xu hướng DevOps:
+- GitOps trở thành tiêu chuẩn quản lý hạ tầng.
+- DevSecOps đưa bảo mật vào pipeline.
+- AIOps dùng AI hỗ trợ vận hành.
+
+Phù hợp với ai: Người ghét công việc lặp lại, thích tự động hóa, và vui khi thấy deployment thành công.
+
+3. Site Reliability Engineer (SRE): Người gác cổng hệ thống
+SRE ra đời từ Google, kết hợp kỹ thuật phần mềm và vận hành để hệ thống chạy mượt, ổn định, mở rộng được và ít downtime.
+
+Trọng tâm chính: Giữ hệ thống đáng tin cậy, khả dụng, và chịu tải.
+
+Kỹ năng cần thiết:
+- Observability: log, metrics, tracing.
+- Chaos Engineering.
+- SLO, error budget.
+- Tối ưu hiệu năng, tìm nút cổ chai.
+- Tự động hóa phản ứng sự cố.
+- Hiểu hệ thống phân tán.
+- Quản lý on-call.
+
+Một ngày làm việc:
+- Kiểm tra số liệu dịch vụ.
+- Post-mortem sự cố.
+- Viết runbook xử lý đột biến traffic.
+- Chạy thử nghiệm chaos.
+- Điều chỉnh SLOs.
+
+Mức lương (tham khảo):
+- Mới vào: 90k – 115k USD/năm
+- Kinh nghiệm: 120k – 160k USD/năm
+- Quản lý: 150k – 200k USD/năm
+
+Xu hướng SRE:
+- AIOps dự đoán và xử lý sự cố.
+- Observability as Code.
+- Hệ thống tự phục hồi.
+- AI agent xử lý khắc phục cơ bản.
+
+Phù hợp với ai: Người mê dữ liệu, ghét downtime, có khả năng xử lý áp lực và tìm nguyên nhân gốc rễ.
+
+So sánh và giao thoa
+- Cloud Engineer & DevOps: Đều dùng IaC, tự động hóa, hiểu dịch vụ cloud.
+- DevOps & SRE: Cùng quan tâm CI/CD, giám sát, triển khai.
+- SRE & Cloud Engineer: Đều thiết kế mở rộng, bảo mật, tối ưu hiệu năng.
+- Điểm chung cả ba: Tự động hóa, tư duy hệ thống, viết code, tập trung vào kinh doanh.
+
+Lựa chọn con đường
+- Cloud Engineer: Yêu thích hạ tầng, cloud services, tối ưu chi phí.
+- DevOps Engineer: Yêu tự động hóa, CI/CD, làm cầu nối giữa Dev và Ops.
+- SRE: Yêu hệ thống ổn định, hiệu năng, quan sát, xử lý sự cố.
+
+Những hiểu lầm phổ biến
+- Cloud Engineer chỉ biết click console → Sai, họ viết code nhiều.
+- DevOps chỉ build code → Sai, họ thay đổi văn hóa và kỹ thuật.
+- SRE chỉ là Ops biết code → Sai, họ tập trung vào độ tin cậy.
+- Ba vai trò thay thế cho nhau → Sai, chúng bổ trợ và giao thoa.
+
+Chuyện thật từ thực tế
+- Cloud Engineer: Hóa đơn cloud tăng gấp 10 lần vì quên tắt instance.
+- DevOps Engineer: Giảm thời gian triển khai từ 3 tiếng xuống 10 phút, tạo ra nhiều yêu cầu mới.
+- SRE: Nhờ chaos engineering mà hệ thống đứng vững khi traffic tăng gấp 20 lần.
+
+Kết luận
+Cloud Engineer xây dựng hạ tầng. DevOps Engineer tối ưu phân phối. SRE đảm bảo vận hành ổn định. Cả ba vai trò đều quan trọng, đều được săn đón, và có thể là bệ phóng cho sự nghiệp công nghệ.
