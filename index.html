@@ -14,7 +14,7 @@
     <title>Portfolio | Canh Nguyen Quang</title>
 </head>
 <body oncontextmenu="return false">
-    <audio id="bg-music" src="./assets/audio/music.mp3" loop></audio>
+  <audio id="bg-music" src="./assets/audio/music.mp3" loop></audio>
 
 <!-- pre loader -->
 <!-- <div class="loader-container">
@@ -55,9 +55,12 @@
         <a href="#about" class="btn"><span>About Me</span>
           <i class="fas fa-arrow-circle-down"></i>
         </a>
-        <button id="play-music-btn" class="btn" type="button">
-          <span>Play Music</span>
-          <i class="fas fa-music"></i>
+        <button id="play-music-btn" class="btn music-btn" type="button">
+          <span id="music-btn-text">Play Music</span>
+          <span class="music-icon">
+            <i class="fas fa-music"></i>
+            <span class="music-wave"></span>
+          </span>
         </button>
       </div>
       <div class="socials">
@@ -108,7 +111,7 @@
         </div>
         
         <div class="resumebtn">
-            <a href="https://www.youtube.com/watch?v=FJ8T7tJ9hRE&list=RDMM&start_radio=1&rv=g8gYCuD36ok" target="_blank" class="btn"><span>Resume</span>
+            <a href="https://www.youtube.com/watch?v=FJ8T7tJ9hRE&list=RDFJ8T7tJ9hRE&start_radio=1" target="_blank" class="btn"><span>Resume</span>
                 <i class="fas fa-chevron-right"></i>
             </a>
         </div>
@@ -234,100 +237,6 @@
 
 </div>
 </section>
-<!-- education section ends -->
-
-<!--
- experience section starts
-<section class="experience" id="experience">
-
-  <h2 class="heading"><i class="fas fa-briefcase"></i> Experience </h2>
-
-  <div class="timeline">
-
-    <div class="container right">
-      <div class="content">
-        <div class="tag">
-          <h2>Self Employed</h2>
-        </div>
-        <div class="desc">
-            <h3>Full Stack Developer</h3>
-            <p>Oct 2021 - present</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="container left">
-      <div class="content">
-        <div class="tag">
-          <h2>Mapstreak Flyseas</h2>
-        </div>
-        <div class="desc">
-            <h3>Web Developer | Internship</h3>
-            <p>June 2021 - Dec 2021</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="container right">
-      <div class="content">
-        <div class="tag">
-          <h2>The Spark Foundation</h2>
-        </div>
-        <div class="desc">
-            <h3>Website Developer | Internship</h3>
-            <p>May 2021 - June 2021</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="container left">
-      <div class="content">
-        <div class="tag">
-          <h2>The Spark Foundation</h2>
-        </div>
-        <div class="desc">
-            <h3>Mobile Application Developer | Internship</h3>
-            <p>April 2021 - May 2021</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="container right">
-      <div class="content">
-        <div class="tag">
-          <h2>Frshr Technologies</h2>
-        </div>
-        <div class="desc">
-            <h3>Wordpress Developer | Internship</h3>
-            <p>April 2021 - April 2021</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="container left">
-      <div class="content">
-        <div class="tag">
-          <h2>WonderingBlog</h2>
-        </div>
-        <div class="desc">
-            <h3>Web Development & SEO | Internship</h3>
-            <p>March 2021 - April 2021</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="morebtn">
-    <a href="/experience" class="btn"><span>View All</span>
-      <i class="fas fa-arrow-right"></i>
-  </a>
-  </div>
-
-</div>
-
-</section>
- experience section ends -->
-
 
 <!-- certifications section starts -->
 <section class="certifications" id="certifications">
@@ -394,6 +303,27 @@
 </section>
 <!-- daily life photos section ends -->
 
+<!-- blog section starts -->
+<!-- Blog overlay popup -->
+<section id="blog" class="blog">
+  <h2 class="heading">My Blog</h2>
+
+  <div class="blog-carousel-outer" id="blogTrackOuter">
+    <!-- Track để JS render card -->
+    <div class="blog-carousel" id="blogCarousel"></div>
+  </div>
+</section>
+
+<!-- Blog overlay popup (bắt buộc có đúng id/class) -->
+<div class="blog-overlay" id="blogOverlay">
+  <div class="blog-popup">
+    <button class="close-btn" id="closeBlogPopup">&times;</button>
+    <h2 class="popup-title"></h2>
+    <div class="popup-content"></div>
+  </div>
+</div>
+
+<!-- blog section ends -->
 
 
 <!-- footer section starts -->
@@ -467,9 +397,6 @@
 
 <script src="./assets/js/script.js"></script>
 
+
 </body>
 </html>
-
-
-
-
