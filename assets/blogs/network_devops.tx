@@ -1,0 +1,109 @@
+Networking trong Docker (Chuyên sâu)
+
+1. Giới Thiệu về Docker Networking
+Docker cung cấp nhiều tùy chọn networking để container có thể giao tiếp với nhau cũng như với thế giới bên ngoài. Hiểu rõ cách Docker quản lý mạng sẽ giúp bạn:
+  - Kết nối các container một cách hiệu quả.
+  - Debug các vấn đề về networking.
+  - Tăng cường bảo mật.
+  - Tối ưu hiệu suất hệ thống.
+
+2. Các Loại Mạng trong Docker
+Docker có 5 loại network chính:
+
+a. Bridge Network (Mặc định)
+  - Dành cho các container trên cùng một host.
+  - Container có thể giao tiếp với nhau bằng tên (hostname).
+  - Không kết nối được trực tiếp với mạng ngoài nếu không có port mapping.
+  - Tạo bridge network tùy chỉnh:
+      docker network create --driver bridge my_bridge
+  - Chạy container trong network này:
+      docker run -d --net=my_bridge --name=app1 nginx
+  - Kiểm tra danh sách container trong network:
+      docker network inspect my_bridge | jq '.[0].Containers'
+
+b. Host Network
+  - Container dùng trực tiếp network của host.
+  - Không có network isolation.
+  - Hiệu năng cao hơn do bỏ qua NAT.
+  - Chạy container với host network:
+      docker run -d --net=host nginx
+  - Kiểm tra kết nối mạng:
+      netstat -tulnp | grep nginx
+
+c. Overlay Network (Dành cho Swarm Mode)
+  - Kết nối container trên nhiều host khác nhau.
+  - Yêu cầu Docker Swarm.
+  - Tạo overlay network:
+      docker network create -d overlay my_overlay
+  - Thêm service vào overlay network:
+      docker service create --name web --network my_overlay nginx
+
+d. Macvlan Network
+  - Container có IP riêng trong cùng dải mạng với host.
+  - Dùng cho trường hợp cần container có IP tĩnh.
+  - Tạo macvlan network:
+      docker network create -d macvlan \
+        --subnet=192.168.1.0/24 \
+        --gateway=192.168.1.1 \
+        -o parent=eth0 my_macvlan
+  - Gán container vào macvlan network:
+      docker network connect my_macvlan my_container
+
+e. None Network
+  - Không có kết nối mạng.
+  - Dùng cho container chạy isolated.
+      docker run -d --net=none busybox
+
+3. Cách Kiểm Tra & Debug Networking
+a. Kiểm Tra Thông Tin Mạng
+   docker network ls  # Danh sách các networks
+   docker network inspect my_bridge  # Chi tiết về network
+
+b. Kiểm Tra Kết Nối Giữa Các Container
+   docker exec -it container1 ping container2
+
+c. Kiểm Tra Port Mở
+   docker ps --format "table {{.Names}}\t{{.Ports}}"
+
+d. Debug DNS Resolution Trong Docker
+   docker exec -it my_container cat /etc/resolv.conf
+   Nếu DNS không hoạt động, hãy thử restart Docker daemon:
+   systemctl restart docker
+
+4. Bảo Mật Docker Networking
+a. Giới Hạn Container Kết Nối Ra Ngoài
+   docker run --rm -d --net=none nginx
+
+b. Chặn Container Truy Cập Internet (Firewall)
+   iptables -A FORWARD -o eth0 -m state --state NEW -j DROP
+
+c. Dùng Network Policy với Docker Swarm
+   docker network create --driver overlay \
+     --opt encrypted my_secure_network
+
+d. Sử Dụng Seccomp & AppArmor
+   docker run --security-opt seccomp=/path/to/seccomp-profile.json nginx
+
+5. Tối Ưu Hiệu Suất Docker Networking
+a. Giảm Thiểu Overhead NAT
+   Sử dụng host network nếu cần hiệu suất cao:
+   docker run --net=host nginx
+
+b. Dùng eBPF Để Quan Sát Traffic
+   Cilium là một giải pháp dựa trên eBPF giúp tối ưu hiệu suất networking. Cài đặt Cilium:
+   kubectl apply -f https://raw.githubusercontent.com/cilium/cilium/v1.12/install/kubernetes/quick-install.yaml
+
+c. Dùng TCP/IP Tuning
+   Tối ưu sysctl để cải thiện tốc độ mạng:
+   sysctl -w net.core.somaxconn=1024
+   sysctl -w net.ipv4.tcp_tw_reuse=1
+
+6. Kết Luận
+  - Bridge network phù hợp với môi trường dev/test.
+  - Host network phù hợp với hiệu năng cao.
+  - Overlay network dùng cho multi-host deployment.
+  - Macvlan network giúp container có IP tĩnh.
+  - None network dùng để cô lập container.
+  - Sử dụng firewall, network policy và seccomp để tăng cường bảo mật.
+  - Tối ưu bằng cách tuning TCP/IP và sử dụng eBPF để giám sát hiệu suất.
+  - Hiểu rõ Docker Networking giúp bạn triển khai hệ thống linh hoạt, an toàn và hiệu quả hơn!
