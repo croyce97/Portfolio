@@ -191,7 +191,8 @@ header .navbar ul li a:hover {
 .home-btn-group {
   display: flex;
   align-items: center;
-  gap: 1.2rem; /* khoảng cách giữa các nút */
+  gap: 1.2rem;
+  margin-top: 1.2rem;
 }
 
 .home #particles-js {
@@ -362,7 +363,23 @@ header .navbar ul li a:hover {
   gap: 2rem;
   flex-wrap: wrap;
   padding: 4rem;
+  /* Glassmorphism effect */
+  background: rgba(255,255,255,0.13);
+  border-radius: 2.2rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(255,255,255,0.18);
+  position: relative;
+  overflow: hidden;
+  animation: about-fade-in 1.2s cubic-bezier(.34,1.56,.64,1);
 }
+
+@keyframes about-fade-in {
+  0% { opacity: 0; transform: translateY(60px) scale(0.98);}
+  100% { opacity: 1; transform: translateY(0) scale(1);}
+}
+
 .about .row .image {
   text-align: center;
   flex: 1 1 35rem;
@@ -370,22 +387,32 @@ header .navbar ul li a:hover {
 .about .row .image img {
   margin: 4rem;
   width: 30rem;
-  height: auto;
-  border-radius: 5%;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.6);
-  transition: 
+  height: 30rem;
+  border-radius: 50%;
+  box-shadow: 0 5px 24px rgba(0, 0, 0, 0.25), 0 0 0 8px #4a00e033;
+  border: 5px solid transparent;
+  background: linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(135deg, #6a5af9 0%, #32d1d6 100%) border-box;
+  transition:
     box-shadow 0.35s cubic-bezier(.34,1.56,.64,1),
     border 0.35s,
     filter 0.35s;
-  border: 4px solid transparent;
   cursor: pointer;
-  /* Không dùng mix-blend-mode */
+  position: relative;
+  z-index: 2;
+  animation: avatar-glow 2.5s infinite alternate;
+}
+
+@keyframes avatar-glow {
+  0% { box-shadow: 0 0 0 0 #32d1d633, 0 5px 24px rgba(0,0,0,0.25);}
+  100% { box-shadow: 0 0 32px 8px #32d1d655, 0 5px 24px rgba(0,0,0,0.25);}
 }
 
 .about .row .image img:hover {
-  box-shadow: 0 12px 32px rgba(0,112,243,0.18), 0 2px 8px rgba(0,0,0,0.12);
-  border: 4px solid #4a00e0; /* đổi màu viền theo nền */
-  filter: brightness(1.08) saturate(1.1);
+  filter: brightness(1.12) saturate(1.18);
+  border: 5px solid #ffd700;
+  box-shadow: 0 0 48px 12px #ffd70055, 0 8px 32px rgba(32, 32, 120, 0.25);
+  animation: none;
 }
 .about .row .content {
   flex: 1 1 45rem;
@@ -969,6 +996,223 @@ header .navbar ul li a:hover {
   100% { transform: translateY(0);}
 }
 
+/* Hiệu ứng sóng nhạc cho nút Play Music */
+.music-btn {
+  position: relative;
+  overflow: visible;
+  background: linear-gradient(90deg, #2b3dda 60%, #2506ad 100%);
+  box-shadow: 0px 5px 18px rgba(48, 68, 247, 0.6), 0 0 0 8px #2b3dda22;
+  transition: background 0.4s, box-shadow 0.4s, transform 0.18s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.music-btn .music-icon {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.5rem;
+  position: relative;
+}
+.music-btn .music-wave {
+  display: none;
+  width: 18px;
+  height: 18px;
+  margin-left: 0.2rem;
+  vertical-align: middle;
+  position: relative;
+  top: 2px;
+}
+.music-btn .music-wave span {
+  display: inline-block;
+  width: 3px;
+  height: 100%;
+  margin: 0 1px;
+  background: #fff;
+  border-radius: 2px;
+  animation: music-wave 1s infinite linear;
+  opacity: 0.7;
+}
+.music-btn .music-wave span:nth-child(1) { animation-delay: 0s; }
+.music-btn .music-wave span:nth-child(2) { animation-delay: 0.2s; }
+.music-btn .music-wave span:nth-child(3) { animation-delay: 0.4s; }
 
+@keyframes music-wave {
+  0% { height: 18px; }
+  20% { height: 8px; }
+  40% { height: 18px; }
+  60% { height: 12px; }
+  80% { height: 18px; }
+  100% { height: 18px; }
+}
+
+.music-btn.playing {
+  background: linear-gradient(90deg, #1a047e 60%, #2b3dda 100%);
+  box-shadow: 0px 8px 24px #2b3dda99, 0 0 0 12px #2b3dda33;
+  transform: scale(1.04);
+}
+.music-btn .fa-music {
+  color: #fff;
+  font-size: 1.5rem;
+  transition: color 0.3s;
+}
+.music-btn.playing .fa-music {
+  color: #ffd700;
+  text-shadow: 0 0 8px #ffd70088;
+}
+.music-btn.playing .music-wave {
+  display: inline-block;
+}
+
+.about .row .content > * {
+  opacity: 0;
+  transform: translateY(32px);
+  animation: about-content-fade 0.7s forwards;
+}
+.about .row .content h3 { animation-delay: 0.1s;}
+.about .row .content .tag { animation-delay: 0.25s;}
+.about .row .content p { animation-delay: 0.4s;}
+.about .row .content .box-container { animation-delay: 0.6s;}
+.about .row .content .resumebtn { animation-delay: 0.8s;}
+
+@keyframes about-content-fade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.about .heading i {
+  color: #ffd700;
+  animation: about-icon-bounce 1.2s infinite alternate;
+  margin-right: 0.7rem;
+}
+
+@keyframes about-icon-bounce {
+  0% { transform: translateY(0);}
+  60% { transform: translateY(-8px);}
+  100% { transform: translateY(0);}
+}
+
+.about .row:hover {
+  transform: translateY(-8px) scale(1.015);
+  box-shadow: 0 16px 48px 0 rgba(50, 209, 214, 0.18), 0 8px 32px rgba(0,0,0,0.13);
+  transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), box-shadow 0.35s;
+}
+
+/* Blog section */
+.blog {
+  background: linear-gradient(90deg, #2348c5 0%, #f8fafc 100%);
+  padding: 4rem 9%;
+  min-height: 60vh;
+}
+.blog .heading { text-align: center; margin-bottom: 2.5rem; }
+
+/* Nếu không dùng layout lưới cũ có thể bỏ .blog-container */
+.blog-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+/* --- CARD (gộp lại thành 1 block) --- */
+.blog-card .blog-title {
+  font-size: 2rem; font-weight: 700; color: #2506ad; margin-bottom: 1rem;
+}
+.blog-card .blog-desc {
+  font-size: 1.3rem; color: #333; margin-bottom: 1.2rem; flex: 1;
+}
+.blog-card .blog-link {
+  margin-top: auto; color: #6a5af9; font-weight: 600; text-decoration: underline;
+  font-size: 1.2rem; transition: color 0.2s;
+}
+.blog-card .blog-link:hover { color: #2506ad; }
+
+@keyframes blog-slide-in {
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* --- OVERLAY/POPUP --- */
+.blog-overlay {
+  position: fixed; z-index: 9999; inset: 0;
+  background: rgba(30, 34, 90, 0.75);
+  display: none; align-items: center; justify-content: center;
+  animation: fadeIn 0.3s;
+}
+@keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+.blog-overlay.active { display: flex; }
+.blog-popup {
+  background:#eee9e9; border-radius:1.5rem; max-width:1000px; width:90vw; max-height:80vh;
+  padding: 2.5rem 2rem 2rem; box-shadow: 0 8px 48px rgba(31,38,135,.18);
+  position: relative; overflow-y:auto; animation: popupZoom .4s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popupZoom { from {transform:scale(.7);} to {transform:scale(1);} }
+.blog-popup .close-btn {
+  position:absolute; top:1.2rem; right:1.5rem; background:none; border:none;
+  font-size:2.5rem; color:#6a5af9; cursor:pointer; z-index:2; transition:color .2s;
+}
+.blog-popup .close-btn:hover { color:#2506ad; }
+.blog-popup .popup-title { font-size:2.2rem; font-weight:700; margin-bottom:1.2rem; color:#2506ad; }
+.blog-popup .popup-content {
+  font-size:1.4rem; color:#222; white-space:pre-line; line-height:1.7; margin-bottom:1rem; word-break:break-word;
+}
+
+/* --- CAROUSEL --- */
+.blog-carousel-outer {
+  overflow:hidden; width:100%; position:relative; padding:0; margin:0 auto 2rem;
+}
+.blog-carousel {
+  display:flex; gap:2rem; width:max-content;
+  animation: blog-marquee 30s linear infinite;
+  will-change: transform;
+}
+@keyframes blog-marquee { 0% {transform:translateX(0);} 100% {transform:translateX(-50%);} }
+
+/* pause on hover */
+.blog-carousel-outer:hover .blog-carousel { animation-play-state: paused; }
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .blog-carousel { animation: none; transform: none; }
+}
+
+/* responsive */
+@media (max-width: 700px) {
+  .blog-card { min-width: 85vw; max-width: 90vw; flex: 0 0 85vw; }
+}
+
+.blog-card {
+  background: rgba(183, 193, 227, 0.95);
+  border-radius: 1.2rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.10);
+  padding: 2.2rem 2.5rem;
+  min-width: 320px;
+  max-width: 340px;
+  flex: 0 0 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  /* hiệu ứng xuất hiện ban đầu */
+  opacity: 0;
+  transform: translateX(-60px);        /* trạng thái đầu */
+  animation: blog-slide-in 0.8s forwards;
+  animation-delay: var(--delay, 0s);
+
+  margin-bottom: 1.5rem;
+  border-left: 6px solid #6a5af9;
+
+  /* mượt khi hover */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  will-change: transform;
+}
+
+.blog-card:hover {
+  /* GIỮ translateX(0) rồi mới scale để rõ ràng */
+  transform: translateX(0) scale(1.05);
+  z-index: 2;  /* nổi lên trên các card khác */
+  box-shadow: 0 20px 48px 0 rgba(50, 209, 214, 0.18),
+              0 12px 32px rgba(0,0,0,0.12);
+}
 
 
