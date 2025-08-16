@@ -189,136 +189,120 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   // 1) Danh sách blog
   const blogs = [
-    {
-      file: "devops_role.txt",
-      title: "The Importance of DevOps in Modern Businesses",
-      desc: "DevOps is no longer just a buzzword.",
-    },
-    {
-      file: "devops_cloud_sre.txt",
-      title: "DevOps, Cloud và SRE: Góc nhìn cá nhân về sự khác biệt",
-      desc: "Kỹ Sư Đám Mây, DevOps Với SRE Mấy Ông Này Khác Gì Nhau?",
-    },
-    {
-      file: "network_devops.txt",
-      title: "Networking trong Docker chuyên sâu",
-      desc: "Networking trong Docker chuyên sâu.",
-    },
-    // có thể thêm/bớt bài; không cần lặp lại 3 lần như cũ vì track sẽ được clone
+    { file: "devops_role.txt",      title: "The Importance of DevOps in Modern Businesses", desc: "DevOps is no longer just a buzzword." },
+    { file: "devops_cloud_sre.txt", title: "DevOps, Cloud và SRE: Góc nhìn cá nhân về sự khác biệt", desc: "Kỹ Sư Đám Mây, DevOps Với SRE Mấy Ông Này Khác Gì Nhau?" },
+    { file: "network_devops.txt",   title: "Networking trong Docker chuyên sâu", desc: "Networking trong Docker chuyên sâu." }
   ];
 
   // 2) Phần tử render
-  const track = document.getElementById("blogCarousel"); // <div class="blog-carousel" id="blogCarousel">
-  const outer = document.getElementById("blogTrackOuter"); // <div class="blog-carousel-outer" id="blogTrackOuter">
-  const gridFallback = document.querySelector(".blog-container"); // fallback nếu chưa có carousel
+  const track = document.getElementById("blogCarousel");       // <div id="blogCarousel">
+  const outer = document.getElementById("blogTrackOuter");     // <div id="blogTrackOuter">
+  const gridFallback = document.querySelector(".blog-container");
 
-  if (!track && !gridFallback) return; // không có khu vực để render
+  if (!track && !gridFallback) return;
 
-  // 3) Tạo 1 card
+  // 3) Tạo 1 card (không gắn listener trực tiếp!)
   function createCard(blog, idx) {
     const card = document.createElement("article");
     card.className = "blog-card";
-    // Nếu bạn vẫn muốn hiệu ứng "slide-in" ban đầu:
     card.style.setProperty("--delay", `${0.12 * (idx % 10)}s`);
-
-    const title = document.createElement("h3");
-    title.className = "blog-title";
-    title.textContent = blog.title;
-
-    const desc = document.createElement("p");
-    desc.className = "blog-desc";
-    desc.textContent = blog.desc;
-
-    const link = document.createElement("a");
-    link.className = "blog-link";
-    link.href = "#";
-    link.textContent = "Read more →";
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-      showBlogPopup(blog.title, `./assets/blogs/${blog.file}`);
-    });
-
-    card.appendChild(title);
-    card.appendChild(desc);
-    card.appendChild(link);
+    card.innerHTML = `
+      <h3 class="blog-title">${blog.title}</h3>
+      <p class="blog-desc">${blog.desc}</p>
+      <a class="blog-link" href="#" data-index="${idx}">Read more →</a>
+    `;
     return card;
   }
 
-  // 4) Render vào track (carousel) hoặc grid fallback
+  // 4) Render
   if (track) {
-    // làm sạch rồi render 1 lượt
     track.innerHTML = "";
     blogs.forEach((b, i) => track.appendChild(createCard(b, i)));
 
-    // 4.1) Nhân đôi chuỗi card để nối mượt A..X + A..X
+    // Clone dãy để chạy loop mượt (A..X + A..X)
     const originals = Array.from(track.children);
-    originals.forEach((el) => track.appendChild(el.cloneNode(true)));
+    originals.forEach(el => track.appendChild(el.cloneNode(true)));
 
-    // 4.2) Tốc độ theo chiều rộng (ổn định khi thay số bài)
+    // Tốc độ marquee dựa vào bề rộng thực
     function setSpeed() {
-      const SPEED_PX_PER_SEC = 80; // chỉnh nhanh/chậm tuỳ ý
+      const SPEED_PX_PER_SEC = 80;
       const duration = track.scrollWidth / SPEED_PX_PER_SEC;
       track.style.animationDuration = duration + "s";
     }
     setSpeed();
     window.addEventListener("resize", setSpeed);
 
-    // 4.3) Tạm dừng khi tab ẩn để tiết kiệm
+    // Pause khi tab ẩn
     document.addEventListener("visibilitychange", () => {
       track.style.animationPlayState = document.hidden ? "paused" : "running";
     });
+
+    // 5) EVENT DELEGATION: bắt click trên mọi .blog-link (kể cả bản clone)
+    track.addEventListener("click", (e) => {
+      const a = e.target.closest(".blog-link");
+      if (!a) return;
+      e.preventDefault();
+
+      // Tìm index bài gốc tương ứng
+      const card = a.closest(".blog-card");
+      const allCards = Array.from(track.querySelectorAll(".blog-card"));
+      const idxInTrack = allCards.indexOf(card);
+      const originalIdx = ((idxInTrack % blogs.length) + blogs.length) % blogs.length;
+
+      const b = blogs[originalIdx];
+      showBlogPopup(b.title, `./assets/blogs/${b.file}`);
+      track.style.animationPlayState = "paused"; // dừng dòng chảy khi đọc
+    });
+
   } else if (gridFallback) {
-    // Nếu chưa dùng carousel, đổ về layout grid cũ
+    // Fallback không clone → có thể dùng delegation hoặc gắn trực tiếp
     gridFallback.innerHTML = "";
     blogs.forEach((b, i) => gridFallback.appendChild(createCard(b, i)));
+
+    gridFallback.addEventListener("click", (e) => {
+      const a = e.target.closest(".blog-link");
+      if (!a) return;
+      e.preventDefault();
+      const idx = Number(a.getAttribute("data-index"));
+      const b = blogs[idx];
+      showBlogPopup(b.title, `./assets/blogs/${b.file}`);
+    });
   }
 
-  // 5) Popup đóng mở
-  const overlay = document.getElementById("blogOverlay");
+  // 6) Popup
+  const overlay  = document.getElementById("blogOverlay");
   const closeBtn = document.getElementById("closeBlogPopup");
-  if (overlay && closeBtn) {
-    overlay.addEventListener("click", function (e) {
-      if (e.target === overlay) overlay.classList.remove("active");
-      // Khi đóng popup, tiếp tục animation nếu có track
-      if (track) track.style.animationPlayState = "running";
-    });
-    closeBtn.addEventListener("click", function () {
-      overlay.classList.remove("active");
-      if (track) track.style.animationPlayState = "running";
-    });
-  }
 
-  // (tuỳ chọn) Khi mở popup, dừng dòng chảy để người dùng đọc
-  function pauseCarouselForReading() {
-    if (track) track.style.animationPlayState = "paused";
-  }
-
-  // 6) Hàm mở popup & load .txt
   function showBlogPopup(title, fileUrl) {
     if (!overlay) return;
-    const popupTitle = overlay.querySelector(".popup-title");
+    const popupTitle   = overlay.querySelector(".popup-title");
     const popupContent = overlay.querySelector(".popup-content");
     if (!popupTitle || !popupContent) return;
 
     popupTitle.textContent = title;
     popupContent.textContent = "Loading...";
     overlay.classList.add("active");
-    pauseCarouselForReading();
 
     fetch(fileUrl)
-      .then((res) => {
+      .then(res => {
         if (!res.ok) throw new Error("Không thể tải nội dung blog.");
         return res.text();
       })
-      .then((text) => {
-        // CSS đã có white-space: pre-line; nên gán textContent là ổn
-        popupContent.textContent = text;
-      })
-      .catch(() => {
-        popupContent.textContent = "Không thể tải nội dung blog.";
-      });
+      .then(text => { popupContent.textContent = text; })
+      .catch(() => { popupContent.textContent = "Không thể tải nội dung blog."; });
   }
 
-  // đưa ra phạm vi global tối thiểu nếu cần dùng ở nơi khác
-  window.showBlogPopup = showBlogPopup;
+  // Đóng popup
+  if (overlay && closeBtn) {
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) {
+        overlay.classList.remove("active");
+        if (track) track.style.animationPlayState = "running";
+      }
+    });
+    closeBtn.addEventListener("click", () => {
+      overlay.classList.remove("active");
+      if (track) track.style.animationPlayState = "running";
+    });
+  }
 });
