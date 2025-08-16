@@ -73,6 +73,40 @@ header {
   background-color: #4481b6;
   box-shadow: 0 1px 4px rgba(146, 161, 176, 0.3);
 }
+.Naruto {
+  position: absolute;
+  top: -10px; /* chỉnh vị trí trên/dưới theo ý bạn */
+  left: -100px; /* bắt đầu ngoài màn hình */
+  width: 90px; /* chỉnh kích thước gif */
+  animation: naruto-run 12s linear infinite; /* thời gian chạy qua màn hình */
+  pointer-events: none; /* không cản click menu */
+}
+@keyframes naruto-run {
+  0% {
+    left: -100px; /* ngoài màn hình bên trái */
+  }
+  100% {
+    left: 100%; /* chạy hết qua bên phải */
+  }
+}
+
+.Dog {
+  position: absolute;
+  top: -10px; /* chỉnh vị trí trên/dưới theo ý bạn */
+  left: -100px; /* bắt đầu ngoài màn hình */
+  width: 90px; /* chỉnh kích thước gif */
+  animation: dog-run 12s linear infinite; /* thời gian chạy qua màn hình */
+  pointer-events: none; /* không cản click menu */
+}
+@keyframes dog-run {
+  0% {
+    left: -200px; /* ngoài màn hình bên trái */
+  }
+  100% {
+    left: 100%; /* chạy hết qua bên phải */
+  }
+}
+
 section {
   min-height: 100vh;
   padding: 2rem 9%;
