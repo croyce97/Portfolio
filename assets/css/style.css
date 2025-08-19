@@ -1,1252 +1,321 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap");
+$(document).ready(function () {
+  // Menu toggle cho mobile
+  $("#menu").click(function () {
+    $(this).toggleClass("fa-times");
+    $(".navbar").toggleClass("nav-toggle");
+  });
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  text-decoration: none;
-  outline: none;
-  border: none;
-  text-transform: capitalize;
-  transition: all 0.2s linear;
-}
-html {
-  font-size: 62.5%;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-}
-body {
-  background: #153084;
-  font-family: "Poppins", sans-serif;
-}
+  // Đóng menu khi cuộn
+  $(window).on("scroll load", function () {
+    $("#menu").removeClass("fa-times");
+    $(".navbar").removeClass("nav-toggle");
 
-*::selection {
-  background: #2b3dda;
-  color: #0c7680;
-}
+    // Hiện nút scroll-top khi cuộn xuống
+    if (window.scrollY > 60) {
+      document.querySelector("#scroll-top").classList.add("active");
+    } else {
+      document.querySelector("#scroll-top").classList.remove("active");
+    }
+  });
 
-html {
-  font-size: 62.5%;
-  overflow-x: hidden;
-}
-html::-webkit-scrollbar {
-  width: 0.8rem;
-}
-html::-webkit-scrollbar-track {
-  background: rgb(235, 202, 245);
-}
-html::-webkit-scrollbar-thumb {
-  background: #420177;
-}
+  // Smooth scroll khi click menu
+  $('a[href*="#"]').on("click", function (e) {
+    e.preventDefault();
+    $("html, body").animate(
+      {
+        scrollTop: $($(this).attr("href")).offset().top,
+      },
+      500,
+      "linear"
+    );
+  });
+});
 
-/* pre loader start */
-.loader-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10000;
-  background: #e6eff1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-}
-.loader-container.fade-out {
-  top: -120%;
-}
-/* pre loader end */
+// Hiệu ứng chuyển động cho các section chính
+const srtop = ScrollReveal({
+  origin: "top",
+  distance: "80px",
+  duration: 1000,
+  reset: true,
+});
 
-/* navbar starts */
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.7rem 10%;
-  height: 6.5rem;
-  background-color: #4481b6;
-  box-shadow: 0 1px 4px rgba(146, 161, 176, 0.3);
-}
-.Naruto {
-  position: absolute;
-  top: -10px; /* chỉnh vị trí trên/dưới theo ý bạn */
-  left: -100px; /* bắt đầu ngoài màn hình */
-  width: 90px; /* chỉnh kích thước gif */
-  animation: naruto-run 12s linear infinite; /* thời gian chạy qua màn hình */
-  pointer-events: none; /* không cản click menu */
-}
-@keyframes naruto-run {
-  0% {
-    left: -100px; /* ngoài màn hình bên trái */
+var typed = new Typed(".typing-text", {
+  strings: ["Devops Engineer", "Tech enthusiast", "Loving Naruto"],
+  loop: true,
+  typeSpeed: 50,
+  backSpeed: 25,
+  backDelay: 500,
+});
+
+// Reveal từng section khi cuộn tới
+srtop.reveal(".home", {
+  interval: 200,
+  opacity: 0,
+  scale: 0.98,
+  easing: "ease-in-out",
+});
+srtop.reveal(".about", {
+  interval: 200,
+  opacity: 0,
+  scale: 0.98,
+  easing: "ease-in-out",
+});
+srtop.reveal(".skills", {
+  interval: 200,
+  opacity: 0,
+  scale: 0.98,
+  easing: "ease-in-out",
+});
+srtop.reveal(".education", {
+  interval: 200,
+  opacity: 0,
+  scale: 0.98,
+  easing: "ease-in-out",
+});
+srtop.reveal(".certifications", {
+  interval: 200,
+  opacity: 0,
+  scale: 0.98,
+  easing: "ease-in-out",
+});
+srtop.reveal(".daily-life", {
+  interval: 200,
+  opacity: 0,
+  scale: 0.98,
+  easing: "ease-in-out",
+});
+srtop.reveal(".blog", {
+  interval: 200,
+  opacity: 0,
+  scale: 0.98,
+  distance: "60px",
+  origin: "bottom",
+  easing: "ease-in-out",
+});
+
+// Hiệu ứng cho gallery và certifications
+srtop.reveal(".daily-life .photo-gallery img", {
+  interval: 120,
+  origin: "bottom",
+  distance: "40px",
+  scale: 0.95,
+});
+srtop.reveal(".skills .bar img", {
+  interval: 120,
+  origin: "bottom",
+  distance: "40px",
+  scale: 0.95,
+});
+srtop.reveal(".certifications .box", {
+  interval: 180,
+  origin: "bottom",
+  distance: "60px",
+  scale: 0.97,
+});
+
+srtop.reveal(".education .box", {
+  interval: 180,
+  origin: "bottom",
+  distance: "60px",
+  scale: 0.97,
+});
+
+// Hiệu ứng tilt cho ảnh
+VanillaTilt.init(document.querySelectorAll(".tilt"), {
+  max: 15,
+});
+
+// pre loader start
+// function loader() {
+//     document.querySelector('.loader-container').classList.add('fade-out');
+// }
+// function fadeOut() {
+//     setInterval(loader, 500);
+// }
+// window.onload = fadeOut;
+// pre loader end
+
+// disable developer mode
+document.onkeydown = function (e) {
+  if (e.keyCode == 123) {
+    return false;
   }
-  100% {
-    left: 100%; /* chạy hết qua bên phải */
+  if (e.ctrlKey && e.shiftKey && e.keyCode == "I".charCodeAt(0)) {
+    return false;
   }
-}
-
-.Dog {
-  position: absolute;
-  top: -10px; /* chỉnh vị trí trên/dưới theo ý bạn */
-  left: -100px; /* bắt đầu ngoài màn hình */
-  width: 90px; /* chỉnh kích thước gif */
-  animation: dog-run 12s linear infinite; /* thời gian chạy qua màn hình */
-  pointer-events: none; /* không cản click menu */
-}
-@keyframes dog-run {
-  0% {
-    left: -200px; /* ngoài màn hình bên trái */
+  if (e.ctrlKey && e.shiftKey && e.keyCode == "C".charCodeAt(0)) {
+    return false;
   }
-  100% {
-    left: 100%; /* chạy hết qua bên phải */
+  if (e.ctrlKey && e.shiftKey && e.keyCode == "J".charCodeAt(0)) {
+    return false;
   }
-}
-
-section {
-  min-height: 100vh;
-  padding: 2rem 9%;
-}
-.heading {
-  font-size: 3.5rem;
-  color: rgb(32, 32, 32);
-  font-weight: 800;
-  text-align: center;
-}
-.heading span {
-  color: rgb(115, 3, 167);
-}
-header .logo {
-  font-size: 1.9rem;
-  font-weight: 800;
-  text-decoration: none;
-  color: #0e2431;
-}
-header .logo i {
-  font-size: 2.2rem;
-}
-header .logo:hover {
-  color: #fc8c05;
-}
-header .navbar ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-header .navbar li {
-  margin-left: 2.5rem;
-}
-header .navbar ul li a {
-  font-size: 1.57rem;
-  color: #0e2431;
-  font-weight: 600;
-  text-decoration: none;
-  letter-spacing: 0.04rem;
-  transition: 0.2s;
-}
-header .navbar ul li a.active,
-header .navbar ul li a:hover {
-  color: #011aff;
-  border-bottom: 0.2rem solid #011aff;
-  padding: 0.5rem 0;
-}
-/* navbar ends */
-
-/* hamburger icon starts*/
-#menu {
-  font-size: 3rem;
-  cursor: pointer;
-  color: rgb(24, 2, 63);
-  display: none;
-}
-@media (max-width: 768px) {
-  #menu {
-    display: block;
+  if (e.ctrlKey && e.keyCode == "U".charCodeAt(0)) {
+    return false;
   }
-  header .navbar {
-    position: fixed;
-    top: 6.5rem;
-    right: -120%;
-    width: 75%;
-    height: 100%;
-    text-align: left;
-    align-items: flex-start;
-    background-color: #0e0f31;
+};
+
+// Hiệu ứng nút Play Music
+document.addEventListener("DOMContentLoaded", function () {
+  const btn = document.getElementById("play-music-btn");
+  const audio = document.getElementById("bg-music");
+  const btnText = document.getElementById("music-btn-text");
+
+  // Tạo sóng nhạc động
+  const wave = document.createElement("span");
+  wave.className = "music-wave";
+  for (let i = 0; i < 3; i++) {
+    const bar = document.createElement("span");
+    wave.appendChild(bar);
   }
-  header .navbar ul {
-    flex-flow: column;
-    padding: 1rem;
+  btn.querySelector(".music-icon").appendChild(wave);
+
+  let isPlaying = false;
+
+  btn.onclick = function () {
+    if (audio.paused) {
+      audio.play();
+      btn.classList.add("playing");
+      btnText.textContent = "Pause Music";
+      isPlaying = true;
+    } else {
+      audio.pause();
+      btn.classList.remove("playing");
+      btnText.textContent = "Play Music";
+      isPlaying = false;
+    }
+  };
+
+  // Nếu nhạc tự dừng (hết file, không lặp), cập nhật lại nút
+  audio.onpause = function () {
+    btn.classList.remove("playing");
+    btnText.textContent = "Play Music";
+    isPlaying = false;
+  };
+  audio.onplay = function () {
+    btn.classList.add("playing");
+    btnText.textContent = "Pause Music";
+    isPlaying = true;
+  };
+});
+
+// BLOG SECTION: Load blog files, render cards, carousel flow, and popup
+document.addEventListener("DOMContentLoaded", function () {
+  // 1) Danh sách blog
+  const blogs = [
+    { file: "devops_role.txt",      title: "The Importance of DevOps in Modern Businesses", desc: "DevOps is no longer just a buzzword." },
+    { file: "devops_cloud_sre.txt", title: "DevOps, Cloud và SRE: Góc nhìn cá nhân về sự khác biệt", desc: "Kỹ Sư Đám Mây, DevOps Với SRE Mấy Ông Này Khác Gì Nhau?" },
+    { file: "network_devops.txt",   title: "Networking trong Docker chuyên sâu", desc: "Networking trong Docker chuyên sâu." }
+  ];
+
+  // 2) Phần tử render
+  const track = document.getElementById("blogCarousel");       // <div id="blogCarousel">
+  const outer = document.getElementById("blogTrackOuter");     // <div id="blogTrackOuter">
+  const gridFallback = document.querySelector(".blog-container");
+
+  if (!track && !gridFallback) return;
+
+  // 3) Tạo 1 card (không gắn listener trực tiếp!)
+  function createCard(blog, idx) {
+    const card = document.createElement("article");
+    card.className = "blog-card";
+    card.style.setProperty("--delay", `${0.12 * (idx % 10)}s`);
+    card.innerHTML = `
+      <h3 class="blog-title">${blog.title}</h3>
+      <p class="blog-desc">${blog.desc}</p>
+      <a class="blog-link" href="#" data-index="${idx}">Read more →</a>
+    `;
+    return card;
   }
-  header .navbar ul li {
-    text-align: center;
-    width: 100%;
-    margin: 1rem 0;
-    border-radius: 0.5rem;
-    width: 26rem;
+
+  // 4) Render
+  if (track) {
+    track.innerHTML = "";
+    blogs.forEach((b, i) => track.appendChild(createCard(b, i)));
+
+    // Clone dãy để chạy loop mượt (A..X + A..X)
+    const originals = Array.from(track.children);
+    originals.forEach(el => track.appendChild(el.cloneNode(true)));
+
+    // Tốc độ marquee dựa vào bề rộng thực
+    function setSpeed() {
+      const SPEED_PX_PER_SEC = 80;
+      const duration = track.scrollWidth / SPEED_PX_PER_SEC;
+      track.style.animationDuration = duration + "s";
+    }
+    setSpeed();
+    window.addEventListener("resize", setSpeed);
+
+    // Pause khi tab ẩn
+    document.addEventListener("visibilitychange", () => {
+      track.style.animationPlayState = document.hidden ? "paused" : "running";
+    });
+
+    // 5) EVENT DELEGATION: bắt click trên mọi .blog-link (kể cả bản clone)
+    track.addEventListener("click", (e) => {
+      const a = e.target.closest(".blog-link");
+      if (!a) return;
+      e.preventDefault();
+
+      // Tìm index bài gốc tương ứng
+      const card = a.closest(".blog-card");
+      const allCards = Array.from(track.querySelectorAll(".blog-card"));
+      const idxInTrack = allCards.indexOf(card);
+      const originalIdx = ((idxInTrack % blogs.length) + blogs.length) % blogs.length;
+
+      const b = blogs[originalIdx];
+      showBlogPopup(b.title, `./assets/blogs/${b.file}`);
+      track.style.animationPlayState = "paused"; // dừng dòng chảy khi đọc
+    });
+
+  } else if (gridFallback) {
+    // Fallback không clone → có thể dùng delegation hoặc gắn trực tiếp
+    gridFallback.innerHTML = "";
+    blogs.forEach((b, i) => gridFallback.appendChild(createCard(b, i)));
+
+    gridFallback.addEventListener("click", (e) => {
+      const a = e.target.closest(".blog-link");
+      if (!a) return;
+      e.preventDefault();
+      const idx = Number(a.getAttribute("data-index"));
+      const b = blogs[idx];
+      showBlogPopup(b.title, `./assets/blogs/${b.file}`);
+    });
   }
-  header .navbar ul li a {
-    display: block;
-    padding: 1rem;
-    text-align: left;
-    color: #fff;
-    font-size: 2rem;
+
+  // 6) Popup
+  const overlay  = document.getElementById("blogOverlay");
+  const closeBtn = document.getElementById("closeBlogPopup");
+
+  function showBlogPopup(title, fileUrl) {
+    if (!overlay) return;
+    const popupTitle   = overlay.querySelector(".popup-title");
+    const popupContent = overlay.querySelector(".popup-content");
+    if (!popupTitle || !popupContent) return;
+
+    popupTitle.textContent = title;
+    popupContent.textContent = "Loading...";
+    overlay.classList.add("active");
+
+    fetch(fileUrl)
+      .then(res => {
+        if (!res.ok) throw new Error("Không thể tải nội dung blog.");
+        return res.text();
+      })
+      .then(text => { popupContent.textContent = text; })
+      .catch(() => { popupContent.textContent = "Không thể tải nội dung blog."; });
   }
-  header .navbar ul li a.active,
-  header .navbar ul li a:hover {
-    padding: 1rem;
-    color: #fff;
-    border-radius: 0.5rem;
-    border-bottom: 0.5rem solid #011aff;
+
+  // Đóng popup
+  if (overlay && closeBtn) {
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) {
+        overlay.classList.remove("active");
+        if (track) track.style.animationPlayState = "running";
+      }
+    });
+    closeBtn.addEventListener("click", () => {
+      overlay.classList.remove("active");
+      if (track) track.style.animationPlayState = "running";
+    });
   }
-  .fa-times {
-    transform: rotate(180deg);
-  }
-  header .navbar.nav-toggle {
-    right: 0;
-  }
-}
-/* hamburger icon ends */
-
-/* hero section starts*/
-.home {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  min-height: 100vh;
-  align-items: center;
-}
-
-.home-btn-group {
-  display: flex;
-  align-items: center;
-  gap: 1.2rem;
-  margin-top: 1.2rem;
-}
-
-.home #particles-js {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-}
-.home::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-}
-.home .content {
-  flex: 1 1 40rem;
-  padding-top: 1rem;
-  z-index: 1;
-}
-.home .image {
-  flex: 1 1 40rem;
-  z-index: 1;
-}
-.home .image img {
-  width: 70%;
-  margin-left: 6rem;
-  border-radius: 50%;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-  transition: box-shadow 0.3s, filter 0.3s;
-}
-.home .image img:hover {
-  box-shadow: 0 8px 32px rgba(32, 32, 120, 0.45), 0 0 0 8px #ff7b0033;
-  filter: brightness(1.08) saturate(1.2);
-}
-.home .content h2 {
-  font-size: 5rem;
-  font-weight: 800;
-  color: #002057;
-}
-.home .content h2 span {
-  font-size: 5rem;
-  font-weight: 800;
-  color: #ff7b00;
-}
-.home .content p {
-  font-size: 2.5rem;
-  color: #000;
-  font-weight: 600;
-  padding: 1rem 0;
-}
-.home .content p span {
-  font-size: 2.5rem;
-  color: rgb(148, 8, 8);
-  font-weight: 600;
-  padding: 1rem 0;
-}
-.home .btn {
-  margin-top: 1rem;
-  line-height: 0;
-  padding: 1.6rem 3rem;
-  border-radius: 4em;
-  transition: 0.5s;
-  color: #fff;
-  background: #2506ad;
-  box-shadow: 0px 5px 18px rgba(48, 68, 247, 0.6);
-  font-family: "Nunito", sans-serif;
-}
-.home .btn span {
-  font-weight: 700;
-  font-size: 1.7rem;
-  letter-spacing: 0.1rem;
-}
-.home .btn i {
-  margin-left: 0.3rem;
-  font-size: 1.5rem;
-  transition: 0.3s;
-}
-.home .btn:hover {
-  background: #1a047e;
-}
-.home .btn:hover i {
-  transform: translateX(5px);
-}
-/* social icons start */
-.socials {
-  position: relative;
-  margin-top: 9rem;
-}
-.socials .social-icons {
-  padding-left: 0;
-  margin-bottom: 0;
-  list-style: none;
-}
-.socials .social-icons li {
-  display: inline-block;
-  margin-bottom: 14px;
-}
-.social-icons a {
-  font-size: 2rem;
-  display: inline-block;
-  line-height: 44px;
-  color: #00d9ff;
-  background-color: #09011b;
-  width: 44px;
-  height: 44px;
-  text-align: center;
-  margin-right: 8px;
-  border-radius: 100%;
-  -webkit-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
-  transition: all 0.2s linear;
-}
-.social-icons a:active,
-.social-icons a:focus,
-.social-icons a:hover {
-  color: #fff;
-  background-color: #0685da;
-}
-.social-icons a.github:hover {
-  background-color: #0e0e0e;
-}
-.social-icons a.twitter:hover {
-  background-color: #00aced;
-}
-.social-icons a.linkedin:hover {
-  background-color: #007bb6;
-}
-.social-icons a.dev:hover {
-  background-color: #070707;
-}
-.social-icons a.instagram:hover {
-  background-color: #ee00da;
-}
-/* social icons end */
-
-/* hero media queries starts*/
-@media (max-width: 450px) {
-  .home .btn {
-    margin: 4rem 0;
-  }
-  .socials {
-    margin-top: 12rem;
-  }
-  .home .image img {
-    margin-top: -12rem;
-  }
-  .home .content p {
-    font-size: 2.2rem;
-  }
-  .home .content p span {
-    font-size: 2.2rem;
-  }
-}
-/* hero media queries ends*/
-/* hero section end */
-
-/* about section starts */
-.about {
-  background: rgb(8, 58, 97);
-}
-.about .row {
-  display: flex;
-  flex-direction: row;
-  gap: 2rem;
-  flex-wrap: wrap;
-  padding: 4rem;
-  /* Glassmorphism effect */
-  background: rgba(255,255,255,0.13);
-  border-radius: 2.2rem;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1.5px solid rgba(255,255,255,0.18);
-  position: relative;
-  overflow: hidden;
-  animation: about-fade-in 1.2s cubic-bezier(.34,1.56,.64,1);
-}
-
-@keyframes about-fade-in {
-  0% { opacity: 0; transform: translateY(60px) scale(0.98);}
-  100% { opacity: 1; transform: translateY(0) scale(1);}
-}
-
-.about .row .image {
-  text-align: center;
-  flex: 1 1 35rem;
-}
-.about .row .image img {
-  margin: 4rem;
-  width: 30rem;
-  height: 30rem;
-  border-radius: 50%;
-  box-shadow: 0 5px 24px rgba(0, 0, 0, 0.25), 0 0 0 8px #4a00e033;
-  border: 5px solid transparent;
-  background: linear-gradient(#fff, #fff) padding-box,
-    linear-gradient(135deg, #6a5af9 0%, #32d1d6 100%) border-box;
-  transition:
-    box-shadow 0.35s cubic-bezier(.34,1.56,.64,1),
-    border 0.35s,
-    filter 0.35s;
-  cursor: pointer;
-  position: relative;
-  z-index: 2;
-  animation: avatar-glow 2.5s infinite alternate;
-}
-
-@keyframes avatar-glow {
-  0% { box-shadow: 0 0 0 0 #32d1d633, 0 5px 24px rgba(0,0,0,0.25);}
-  100% { box-shadow: 0 0 32px 8px #32d1d655, 0 5px 24px rgba(0,0,0,0.25);}
-}
-
-.about .row .image img:hover {
-  filter: brightness(1.12) saturate(1.18);
-  border: 5px solid #ffd700;
-  box-shadow: 0 0 48px 12px #ffd70055, 0 8px 32px rgba(32, 32, 120, 0.25);
-  animation: none;
-}
-.about .row .content {
-  flex: 1 1 45rem;
-  padding: 3rem;
-}
-.about .row .content h3 {
-  color: rgb(27, 27, 27);
-  font-size: 2.5rem;
-}
-.about .row .content .tag {
-  font-size: 1.4rem;
-  color: #020133;
-  font-weight: 600;
-  margin-top: 1rem;
-}
-.about .row .content p {
-  font-size: 1.5rem;
-  margin-top: 1.5rem;
-  font-family: "Nunito";
-  font-weight: 600;
-  text-transform: none;
-}
-.about .row .content .box-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  font-family: "Nunito";
-  font-weight: 600;
-}
-.about .row .content .box-container .box p {
-  text-transform: none;
-}
-.about .row .content .box-container .box p span {
-  color: #818be7;
-}
-.resumebtn {
-  margin-top: 6rem;
-}
-.resumebtn .btn {
-  padding: 1.7rem 3rem;
-  border-radius: 0.8em;
-  color: #fff;
-  background: linear-gradient(90deg, #6a5af9 0%, #8f6ed5 100%);
-  box-shadow: 0 4px 16px rgba(74,0,224,0.18);
-  font-family: "Nunito", sans-serif;
-  font-weight: 700;
-  font-size: 1.8rem;
-  letter-spacing: 0.1rem;
-  border: none;
-  outline: none;
-  position: relative;
-  overflow: hidden;
-  transition: 
-    background 0.4s cubic-bezier(.34,1.56,.64,1),
-    transform 0.22s cubic-bezier(.34,1.56,.64,1),
-    box-shadow 0.22s;
-}
-.resumebtn .btn:hover {
-  background: linear-gradient(90deg, #8f6ed5 0%, #6a5af9 100%);
-  transform: scale(1.06) translateY(-2px);
-  box-shadow: 0 8px 24px rgba(74,0,224,0.22);
-}
-
-/* about media queries starts*/
-@media screen and (max-width: 600px) {
-  .about .row .image {
-    margin-top: 2rem;
-  }
-  .about .row .image img {
-    margin: 0 auto;
-    width: 80%;
-    mix-blend-mode: normal;
-  }
-  .about .row {
-    padding: 0.5rem;
-    margin-bottom: 7rem;
-  }
-  .about .row .content {
-    padding: 1rem;
-  }
-  .about .row .content .box-container {
-    gap: 0;
-  }
-}
-/* about media queries ends*/
-/* about section ends */
-
-/* skills section starts */
-.skills {
-  min-height: 70vh;
-  background: linear-gradient(to bottom, #57059e, #4a00e0);
-}
-.skills h2 {
-  color: #fff;
-}
-.skills .heading span {
-  color: rgb(255, 230, 0);
-}
-.skills .container {
-  background: rgba(0, 0, 22, 0.4);
-  color: #ffffff;
-  border-radius: 2rem;
-  padding: 2rem;
-  width: 90%;
-  margin: auto;
-  margin-top: 2rem;
-}
-.skills .container .row {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  flex-wrap: wrap;
-  gap: 2rem;
-}
-.skills .container .bar {
-  margin-bottom: 15px;
-  padding: 10px;
-  border-radius: 1rem;
-  box-shadow: 0 4px 10px rgba(217, 74, 74, 0.2);
-  background: rgba(13, 13, 48, 0.9);
-  transition: 0.2s;
-}
-.skills .container .bar:hover {
-  transform: scale(1.08) translateY(-6px);
-  box-shadow: 0 8px 32px rgba(0, 112, 243, 0.18), 0 2px 8px rgba(0, 0, 0, 0.12);
-  z-index: 2;
-}
-.skills .container .bar .info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-.skills .container .bar .info i {
-  font-size: 4rem;
-}
-.skills .container .bar .info span {
-  font-size: 2rem;
-  font-weight: 500;
-  font-family: "Poppins";
-  margin-left: 0.5rem;
-}
-/* skills media queries starts*/
-@media screen and (max-width: 600px) {
-  .skills .container {
-    padding: 0;
-    margin: 0;
-  }
-  .skills .container .row {
-    grid-template-columns: repeat(2, 1fr);
-    margin: 1rem;
-    padding: 2rem 0.2rem 2rem 0.2rem;
-    gap: 1rem;
-  }
-  .skills .container {
-    margin-top: 5px;
-    width: 100%;
-  }
-}
-/* skills media queries ends*/
-/* skills section ends */
-
-/* education section starts */
-.education {
-  background: #304f91;
-  min-height: 70vh;
-}
-.education .qoute {
-  font-size: 1.5rem;
-  text-align: center;
-  font-family: "Nunito", sans-serif;
-  font-weight: 600;
-  margin-top: 0.5rem;
-}
-.education .box-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-.education .box-container .box {
-  display: flex;
-  flex-direction: row;
-  width: 80%;
-  border-radius: 0.5rem;
-  box-shadow: 0.2rem 0.5rem 1rem rgba(0, 0, 0, 0.2);
-  text-align: center;
-  position: relative;
-  margin-top: 2rem;
-  overflow: hidden;
-  transition: 0.3s;
-  background: rgb(252, 252, 252);
-}
-.education .box-container .box:hover {
-  transform: scale(1.03);
-  box-shadow: 1rem 0.5rem 1.2rem rgba(0, 0, 0, 0.3);
-}
-.education .box-container .box .image {
-  flex: 1 1 20rem;
-  width: 100%;
-}
-.education .box-container .box img {
-  object-fit: cover;
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-.education .box-container .box .content {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  flex-wrap: wrap;
-  flex: 1 1 70rem;
-}
-.education .box-container .box .content h3 {
-  font-size: 2.5rem;
-  color: #012970;
-  padding: 0.5rem 0;
-  font-weight: 600;
-  text-align: left;
-  margin-left: 1rem;
-}
-.education .box-container .box .content p {
-  font-size: 1.5rem;
-  margin-left: 1rem;
-  text-align: left;
-}
-.education h4 {
-  font-size: 2rem;
-  color: rgb(34, 109, 0);
-  text-align: left;
-  margin: 1rem;
-  font-family: "Nunito", sans-serif;
-  font-weight: 700;
-}
-
-/* education media queries starts*/
-@media screen and (max-width: 600px) {
-  .education .box-container .box {
-    flex-direction: column;
-    width: 100%;
-  }
-  .education .box-container .box .image {
-    width: 100%;
-    height: 25rem;
-  }
-  .education .box-container .box img {
-    width: 100%;
-  }
-  .education .box-container .box .content {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-    flex-wrap: wrap;
-    flex: 0;
-  }
-  .education .btns {
-    margin-top: 2rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    flex-wrap: wrap;
-  }
-}
-/* education media queries ends*/
-/* education section ends */
-
-/* footer section starts */
-.footer {
-  min-height: auto;
-  padding-top: 0;
-  background: rgb(0, 1, 43);
-}
-.footer .box-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.footer .box-container .box {
-  flex: 1 1 25rem;
-  margin: 2.5rem;
-}
-.footer .box-container .box h3 {
-  font-size: 2.5rem;
-  color: #fff;
-  padding-bottom: 1rem;
-  font-weight: normal;
-}
-.footer .box-container .box p {
-  font-size: 1.5rem;
-  color: #ccc;
-  padding: 0.7rem 0;
-  text-transform: none;
-}
-.footer .box-container .box p i {
-  padding-right: 1rem;
-  color: #ffae00;
-}
-.footer .box-container .box a {
-  font-size: 1.5rem;
-  color: rgb(238, 238, 238);
-  padding: 0.3rem 0;
-  display: block;
-}
-.footer .box-container .box a:hover {
-  color: #ffae00;
-}
-.footer .box-container .box .share {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 1rem 0;
-}
-.footer .box-container .box .share a {
-  height: 4rem;
-  width: 4rem;
-  padding: 1rem;
-  text-align: center;
-  border-radius: 5rem;
-  font-size: 1.7rem;
-  margin-right: 1rem;
-  transition: 0.2s;
-  background: rgb(230, 230, 230);
-  color: #02094b;
-  border: none;
-}
-.footer .box-container .box .share a:hover {
-  background: transparent;
-  transform: scale(0.98);
-  border: 0.1rem solid rgb(180, 178, 178);
-  color: #ffae00;
-}
-.footer .credit {
-  padding: 1rem 0 0 0;
-  text-align: center;
-  font-size: 1.5rem;
-  font-family: "Nunito", sans-serif;
-  font-weight: 600;
-  color: #fff;
-  border-top: 0.1rem solid #fff3;
-}
-.footer .credit a {
-  color: #ffae00;
-}
-.footer .fa {
-  color: #e90606;
-  margin: 0 0.3rem;
-  font-size: 1.5rem;
-  animation: pound 0.35s infinite alternate;
-}
-@-webkit-keyframes pound {
-  to {
-    transform: scale(1.1);
-  }
-}
-@keyframes pound {
-  to {
-    transform: scale(1.1);
-  }
-}
-@media (max-width: 450px) {
-  .footer .box-container .box {
-    margin: 1.5rem;
-  }
-  .footer .box-container .box p {
-    padding: 0.7rem;
-  }
-  .footer .box-container .box .share a {
-    padding: 1.2rem;
-  }
-}
-/* footer section ends */
-
-/* common media queries starts*/
-@media (max-width: 450px) {
-  html {
-    font-size: 55%;
-  }
-  body {
-    padding-right: 0;
-  }
-  section {
-    padding: 2rem;
-  }
-}
-/* common media queries ends*/
-
-/* scroll top starts */
-#scroll-top {
-  position: fixed;
-  top: -140%;
-  right: 2rem;
-  padding: 1rem 1.5rem;
-  font-size: 2rem;
-  background: #ffae00;
-  color: rgb(13, 0, 44);
-  border-radius: 50%;
-  transition: 1s linear;
-  z-index: 1000;
-}
-#scroll-top.active {
-  top: calc(100% - 12rem);
-}
-
-.daily-life {
-  padding: 50px 0;
-  background: linear-gradient(to bottom, #4b0082, #6a0dad, #7b2cbf, #8338ec); /* màu tím chuyển dần */
-  color: white;
-}
-
-.daily-life {
-  padding: 15px 250px;
-  text-align: center;
-  background-color: #f9f9f9;
-}
-
-.daily-life .heading {
-  font-size: 4rem;
-  margin-bottom: 20px;
-}
-.daily-life .heading span {
-  color: #FFD700; /* màu vàng gold */
-}
-
-.photo-gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  justify-content: center;
-}
-
-.daily-life .photo-gallery img {
-  width: 22%;           /* 4 ảnh 1 hàng, trừ gap */
-  max-width: 200px;     /* Giới hạn tối đa cho đẹp */
-  min-width: 200px;     /* Không quá nhỏ khi co lại */
-  aspect-ratio: 3/3;    /* Giữ tỷ lệ ảnh đồng đều */
-  object-fit: cover;
-  border-radius: 5%;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.6);
-  border: 4px solid transparent;
-  transition:
-    box-shadow 0.35s cubic-bezier(.34,1.56,.64,1),
-    border 0.35s,
-    filter 0.35s;
-  cursor: pointer;
-}
-
-.daily-life .photo-gallery img:hover {
-  box-shadow: 0 12px 32px rgba(0,112,243,0.18), 0 2px 8px rgba(0,0,0,0.12);
-  border: 4px solid #4a00e0; /* đổi màu viền theo nền */
-  filter: brightness(1.08) saturate(1.1);
-}
-
-/* === Certifications: nền tím, quote to, meta ở trên ảnh === */
-.certifications{
-  padding: 4rem 9%;
-  /* tím đậm dịu mắt */
-  background: linear-gradient(180deg, #2b115e 0%, #1b103a 100%);
-  color: #eaeaf2;
-}
-
-/* === Certifications: nền tím, quote to, meta ở trên ảnh === */
-.certifications{
-  padding: 4rem 9%;
-  /* tím đậm dịu mắt */
-  background: linear-gradient(180deg, #2b115e 0%, #1b103a 100%);
-  color: #eaeaf2;
-}
-
-.certifications .heading i {
-  color: #fff !important;
-  text-shadow: 0 0 6px rgba(255,255,255,0.6);
-}
-.certifications .heading{
-  text-align:center;
-  padding-bottom: 1rem;
-}
-
-.certifications .heading span{
-  color:#32d1d6; /* giữ tông accent cũ nhưng nổi trên nền tím */
-}
-
-.certifications .qoute{
-  text-align:center;
-  margin: 0 auto 2.2rem;
-  max-width: 760px;
-  font-size: 1.5rem;      /* to hơn */
-  line-height: 1.6;
-  opacity: .95;
-  font-weight: 600;
-}
-
-/* Grid cards */
-.certifications .box-container{
-  display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap:1.6rem;
-}
-
-/* Card style (giữ vibe tối, nổi trên nền tím) */
-.certifications .box{
-  display:flex;               /* để đảo thứ tự bằng order */
-  flex-direction: column;
-  background: rgba(191, 26, 26, 0.03);
-  border: 1px solid rgba(204, 31, 31, 0.06);
-  border-radius: 16px;
-  box-shadow: 0 12px 28px rgba(192, 34, 34, 0.25);
-  overflow: hidden;
-  backdrop-filter: blur(2px);
-  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-}
-.certifications .box:hover{
-  transform: translateY(-4px);
-  box-shadow: 0 18px 36px rgba(0,0,0,.32);
-  border-color: rgba(255,255,255,.12);
-}
-
-/* ---- Meta (tên + ngày) ở TRÊN ảnh ---- */
-.certifications .box .content{
-  order: 1;                    /* đưa lên trước ảnh */
-  padding: 1rem 1.2rem 1rem;
-  border-bottom: 1px solid rgba(216, 14, 14, 0.06);
-}
-.certifications .box .content h3{
-  margin: 0 0 .35rem;
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: #f3f6ff;
-}
-.certifications .box .content h4{
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: #c5c8d8;
-}
-
-/* Ảnh ở dưới meta */
-.certifications .box .image{
-  order: 2;
-  width: 100%;
-  aspect-ratio: 16/10;
-  background: radial-gradient(1200px 300px at 10% 0%, rgba(50,209,214,.10), transparent),
-              rgba(211, 21, 21, 0.02);
-  display:grid;
-  place-items:center;
-}
-.certifications .box .image img{
-  max-width: 88%;
-  max-height: 88%;
-  object-fit: contain;
-  filter: drop-shadow(0 6px 18px rgba(58, 56, 56, 0.25));
-}
-
-/* Responsive nhỏ hơn */
-@media (max-width: 480px){
-  .certifications .qoute{ font-size: 1.15rem; }
-  .certifications .box-container{ grid-template-columns: 1fr; }
-}
-
-
-/* Hiệu ứng sóng cho tiêu đề hero section */
-.wave-title {
-  display: inline-block;
-  font-size: 5rem;
-  font-weight: 800;
-  color: #0070f3;
-  background: linear-gradient(90deg, #0070f3 60%, #00c6ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  position: relative;
-  animation: wave 2.5s infinite linear;
-}
-
-@keyframes wave {
-  0% { transform: translateY(0);}
-  10% { transform: translateY(-8px);}
-  20% { transform: translateY(0);}
-  30% { transform: translateY(8px);}
-  40% { transform: translateY(0);}
-  100% { transform: translateY(0);}
-}
-
-/* Hiệu ứng sóng nhạc cho nút Play Music */
-.music-btn {
-  position: relative;
-  overflow: visible;
-  background: linear-gradient(90deg, #2b3dda 60%, #2506ad 100%);
-  box-shadow: 0px 5px 18px rgba(48, 68, 247, 0.6), 0 0 0 8px #2b3dda22;
-  transition: background 0.4s, box-shadow 0.4s, transform 0.18s;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-.music-btn .music-icon {
-  display: inline-flex;
-  align-items: center;
-  margin-left: 0.5rem;
-  position: relative;
-}
-.music-btn .music-wave {
-  display: none;
-  width: 18px;
-  height: 18px;
-  margin-left: 0.2rem;
-  vertical-align: middle;
-  position: relative;
-  top: 2px;
-}
-.music-btn .music-wave span {
-  display: inline-block;
-  width: 3px;
-  height: 100%;
-  margin: 0 1px;
-  background: #fff;
-  border-radius: 2px;
-  animation: music-wave 1s infinite linear;
-  opacity: 0.7;
-}
-.music-btn .music-wave span:nth-child(1) { animation-delay: 0s; }
-.music-btn .music-wave span:nth-child(2) { animation-delay: 0.2s; }
-.music-btn .music-wave span:nth-child(3) { animation-delay: 0.4s; }
-
-@keyframes music-wave {
-  0% { height: 18px; }
-  20% { height: 8px; }
-  40% { height: 18px; }
-  60% { height: 12px; }
-  80% { height: 18px; }
-  100% { height: 18px; }
-}
-
-.music-btn.playing {
-  background: linear-gradient(90deg, #1a047e 60%, #2b3dda 100%);
-  box-shadow: 0px 8px 24px #2b3dda99, 0 0 0 12px #2b3dda33;
-  transform: scale(1.04);
-}
-.music-btn .fa-music {
-  color: #fff;
-  font-size: 1.5rem;
-  transition: color 0.3s;
-}
-.music-btn.playing .fa-music {
-  color: #ffd700;
-  text-shadow: 0 0 8px #ffd70088;
-}
-.music-btn.playing .music-wave {
-  display: inline-block;
-}
-
-.about .row .content > * {
-  opacity: 0;
-  transform: translateY(32px);
-  animation: about-content-fade 0.7s forwards;
-}
-.about .row .content h3 { animation-delay: 0.1s;}
-.about .row .content .tag { animation-delay: 0.25s;}
-.about .row .content p { animation-delay: 0.4s;}
-.about .row .content .box-container { animation-delay: 0.6s;}
-.about .row .content .resumebtn { animation-delay: 0.8s;}
-
-@keyframes about-content-fade {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.about .heading i {
-  color: #ffd700;
-  animation: about-icon-bounce 1.2s infinite alternate;
-  margin-right: 0.7rem;
-}
-
-@keyframes about-icon-bounce {
-  0% { transform: translateY(0);}
-  60% { transform: translateY(-8px);}
-  100% { transform: translateY(0);}
-}
-
-.about .row:hover {
-  transform: translateY(-8px) scale(1.015);
-  box-shadow: 0 16px 48px 0 rgba(50, 209, 214, 0.18), 0 8px 32px rgba(0,0,0,0.13);
-  transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), box-shadow 0.35s;
-}
-
-/* Blog section */
-.blog {
-  background: linear-gradient(90deg, #2348c5 0%, #f8fafc 100%);
-  padding: 4rem 9%;
-  min-height: 60vh;
-}
-.blog .heading { text-align: center; margin-bottom: 2.5rem; }
-
-/* Nếu không dùng layout lưới cũ có thể bỏ .blog-container */
-.blog-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
-}
-
-/* --- CARD (gộp lại thành 1 block) --- */
-.blog-card .blog-title {
-  font-size: 2rem; font-weight: 700; color: #2506ad; margin-bottom: 1rem;
-}
-.blog-card .blog-desc {
-  font-size: 1.3rem; color: #333; margin-bottom: 1.2rem; flex: 1;
-}
-.blog-card .blog-link {
-  margin-top: auto; color: #6a5af9; font-weight: 600; text-decoration: underline;
-  font-size: 1.2rem; transition: color 0.2s;
-}
-.blog-card .blog-link:hover { color: #2506ad; }
-
-@keyframes blog-slide-in {
-  to { opacity: 1; transform: translateX(0); }
-}
-
-/* --- OVERLAY/POPUP --- */
-.blog-overlay {
-  position: fixed; z-index: 9999; inset: 0;
-  background: rgba(30, 34, 90, 0.75);
-  display: none; align-items: center; justify-content: center;
-  animation: fadeIn 0.3s;
-}
-@keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
-.blog-overlay.active { display: flex; }
-.blog-popup {
-  background:#eee9e9; border-radius:1.5rem; max-width:1000px; width:90vw; max-height:80vh;
-  padding: 2.5rem 2rem 2rem; box-shadow: 0 8px 48px rgba(31,38,135,.18);
-  position: relative; overflow-y:auto; animation: popupZoom .4s cubic-bezier(.34,1.56,.64,1);
-}
-@keyframes popupZoom { from {transform:scale(.7);} to {transform:scale(1);} }
-.blog-popup .close-btn {
-  position:absolute; top:1.2rem; right:1.5rem; background:none; border:none;
-  font-size:2.5rem; color:#6a5af9; cursor:pointer; z-index:2; transition:color .2s;
-}
-.blog-popup .close-btn:hover { color:#2506ad; }
-.blog-popup .popup-title { font-size:2.2rem; font-weight:700; margin-bottom:1.2rem; color:#2506ad; }
-.blog-popup .popup-content {
-  font-size:1.4rem; color:#222; white-space:pre-line; line-height:1.7; margin-bottom:1rem; word-break:break-word;
-}
-
-/* --- CAROUSEL --- */
-.blog-carousel-outer {
-  overflow:hidden; width:100%; position:relative; padding:0; margin:0 auto 2rem;
-}
-.blog-carousel {
-  display:flex; gap:2rem; width:max-content;
-  animation: blog-marquee 30s linear infinite;
-  will-change: transform;
-}
-@keyframes blog-marquee { 0% {transform:translateX(0);} 100% {transform:translateX(-50%);} }
-
-/* pause on hover */
-.blog-carousel-outer:hover .blog-carousel { animation-play-state: paused; }
-
-/* reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .blog-carousel { animation: none; transform: none; }
-}
-
-/* responsive */
-@media (max-width: 700px) {
-  .blog-card { min-width: 85vw; max-width: 90vw; flex: 0 0 85vw; }
-}
-
-.blog-card {
-  background: rgba(183, 193, 227, 0.95);
-  border-radius: 1.2rem;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.10);
-  padding: 2.2rem 2.5rem;
-  min-width: 320px;
-  max-width: 340px;
-  flex: 0 0 320px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  /* hiệu ứng xuất hiện ban đầu */
-  opacity: 0;
-  transform: translateX(-60px);        /* trạng thái đầu */
-  animation: blog-slide-in 0.8s forwards;
-  animation-delay: var(--delay, 0s);
-
-  margin-bottom: 1.5rem;
-  border-left: 6px solid #6a5af9;
-
-  /* mượt khi hover */
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  will-change: transform;
-}
-
-.blog-card:hover {
-  /* GIỮ translateX(0) rồi mới scale để rõ ràng */
-  transform: translateX(0) scale(1.05);
-  z-index: 2;  /* nổi lên trên các card khác */
-  box-shadow: 0 20px 48px 0 rgba(50, 209, 214, 0.18),
-              0 12px 32px rgba(0,0,0,0.12);
-}
-
-
+});
