@@ -100,7 +100,20 @@ srtop.reveal(".daily-life .photo-gallery img", {
   distance: "40px",
   scale: 0.95,
 });
+srtop.reveal(".skills .bar img", {
+  interval: 120,
+  origin: "bottom",
+  distance: "40px",
+  scale: 0.95,
+});
 srtop.reveal(".certifications .box", {
+  interval: 180,
+  origin: "bottom",
+  distance: "60px",
+  scale: 0.97,
+});
+
+srtop.reveal(".education .box", {
   interval: 180,
   origin: "bottom",
   distance: "60px",
